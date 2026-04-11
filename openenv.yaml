@@ -1,0 +1,31 @@
+name: sql-debug-env
+version: "1.0.0"
+description: >
+  A real-world OpenEnv environment where an AI agent debugs broken SQL queries
+  against a simulated relational database. The agent receives a broken query,
+  an error message, and a schema, then must produce a corrected SQL query.
+  Models real-world database engineering tasks: syntax repair, logic correction,
+  and query optimization across easy, medium, and hard difficulty levels.
+author: "OpenEnv Hackathon Submission"
+tags:
+  - openenv
+  - sql
+  - debugging
+  - data-engineering
+  - real-world
+tasks:
+  - name: easy_syntax_fix
+    description: "Fix simple SQL syntax errors (missing keywords, typos, wrong quotes)"
+    difficulty: easy
+  - name: medium_logic_fix
+    description: "Fix SQL logic errors (wrong JOIN type, incorrect WHERE clause, bad aggregation)"
+    difficulty: medium
+  - name: hard_optimization_fix
+    description: "Fix complex SQL with multiple errors, subquery issues, and schema mismatches"
+    difficulty: hard
+server:
+  port: 7860
+  host: "0.0.0.0"
+docker:
+  image: sql-debug-env
+  port: 7860
