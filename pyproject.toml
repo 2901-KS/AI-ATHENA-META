@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "sql-debug-env"
+version = "1.0.0"
+description = "OpenEnv SQL Debugging Environment"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "pydantic>=2.10.0",
+    "openai>=1.57.0",
+    "requests>=2.32.0",
+]
+
+[tool.openenv]
+name = "sql-debug-env"
+version = "1.0.0"
+tasks = ["easy_syntax_fix", "medium_logic_fix", "hard_optimization_fix"]
