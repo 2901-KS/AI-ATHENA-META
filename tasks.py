@@ -383,7 +383,7 @@ def grade_submission(
             feedback_parts.append(f"✓ SQL parses correctly (schema issue: {err_str}).")
         else:
             feedback_parts.append(f"✗ Syntax error: {err_str}")
-            raw_reward = max(0.0, 0.05 - attempt_penalty)
+            raw_reward = max(0.001, 0.05 - attempt_penalty)
             return {
                 "reward": raw_reward,
                 "syntax_valid": False,
@@ -395,7 +395,7 @@ def grade_submission(
             }
     except Exception as e:
         feedback_parts.append(f"✗ Syntax error: {e}")
-        raw_reward = max(0.0, 0.05 - attempt_penalty)
+        raw_reward = max(0.001, 0.05 - attempt_penalty)
         return {
             "reward": raw_reward,
             "syntax_valid": False,
@@ -410,7 +410,7 @@ def grade_submission(
     success, submitted_rows, exec_error = _run_sql_on_db(db_path, submitted_sql)
     if not success:
         feedback_parts.append(f"✗ Execution error: {exec_error}")
-        raw_reward = max(0.0, 0.20 - attempt_penalty)  # syntax ok but runtime error
+        raw_reward = max(0.001, 0.20 - attempt_penalty)  # syntax ok but runtime error
         return {
             "reward": raw_reward,
             "syntax_valid": True,
@@ -494,7 +494,7 @@ def grade_submission(
     if difficulty == "hard" and not results_match:
         raw_reward *= 0.9
 
-    final_reward = round(min(1.0, max(0.0, raw_reward)), 4)
+    final_reward = round(min(0.999, max(0.001, raw_reward)), 4)
 
     return {
         "reward": final_reward,

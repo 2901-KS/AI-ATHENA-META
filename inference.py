@@ -168,7 +168,7 @@ def run_task(client: OpenAI, task_name: str) -> float:
     session_id = f"inference-{task_name}"
     rewards: List[float] = []
     steps_taken = 0
-    score = 0.0
+    score = 0.001
     success = False
 
     log_start(task=task_name, env=BENCHMARK, model=MODEL_NAME)
@@ -217,15 +217,15 @@ def run_task(client: OpenAI, task_name: str) -> float:
             # Weighted: 60% best, 40% final (encourages convergence)
             score = 0.6 * best_reward + 0.4 * final_reward
         else:
-            score = 0.0
+            score = 0.001
 
-        score = round(min(1.0, max(0.0, score)), 3)
+        score = round(min(0.999, max(0.001, score)), 3)
         success = score >= SUCCESS_SCORE_THRESHOLD
 
     except Exception as exc:
         print(f"[DEBUG] Task {task_name} failed: {exc}", flush=True)
         if not rewards:
-            rewards = [0.0]
+            rewards = [0.001]
 
     log_end(success=success, steps=steps_taken, score=score, rewards=rewards)
     return score
@@ -253,7 +253,7 @@ def main() -> None:
             print(f"[INFO] Task {task_name} score: {score:.3f}", flush=True)
         except Exception as exc:
             print(f"[ERROR] Task {task_name} crashed: {exc}", flush=True)
-            all_scores.append(0.0)
+            all_scores.append(0.001)
 
     if all_scores:
         avg = sum(all_scores) / len(all_scores)
