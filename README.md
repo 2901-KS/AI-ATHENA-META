@@ -1,3 +1,13 @@
+---
+title: AI ATHENA META
+emoji: 🗄️
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: true
+tags:
+  - openenv
+---
 # 🗄️ SQL Debug Environment
 
 **An OpenEnv-compliant real-world environment for training AI agents to debug SQL queries.**
